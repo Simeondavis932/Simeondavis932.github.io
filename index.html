@@ -3,42 +3,52 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>生日月福利</title>
+  <title>充值页面</title>
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <!-- 欢迎页面 -->
-  <div id="welcome-page" class="page active">
-    <div class="header">🎉 生日月福利！</div>
-    <div class="content">
-      <p>会员等级：<strong>黄金会员</strong></p>
-      <p>可领取优惠券：<strong>满100减20</strong></p>
-      <button onclick="goToDetails()">查看我的生日福利</button>
-    </div>
-  </div>
-
-  <!-- 优惠券详情页面 -->
-  <div id="details-page" class="page">
-    <div class="header">🎂 生日月专属优惠</div>
-    <div class="content">
-      <p>亲爱的 <strong>用户</strong>，祝您生日快乐！</p>
-      <div class="coupon">
-        <p><strong>满100减20</strong></p>
-        <p>有效期：7天内</p>
+  <div class="app">
+    <header class="header">
+      <div class="nav">
+        <button class="back-btn">←</button>
+        <span>充值</span>
+        <button class="menu-btn">•••</button>
       </div>
-      <button onclick="claimCoupon()">领取生日优惠券</button>
-    </div>
-  </div>
+    </header>
 
-  <!-- 领取成功页面 -->
-  <div id="success-page" class="page">
-    <div class="header">🎉 优惠券已领取成功！</div>
-    <div class="content">
-      <p>您的优惠券已存入“卡券中心”。</p>
-      <button onclick="goToCenter()">去使用优惠券</button>
-    </div>
-  </div>
+    <main class="main">
+      <div class="balance">
+        <p class="current-balance">¥<span id="balance">100.00</span></p>
+        <p>当前余额</p>
+      </div>
 
+      <div class="recharge-section">
+        <h2>充值</h2>
+        <div class="options">
+          <button class="option" data-amount="100">
+            ¥100.00
+          </button>
+          <button class="option" data-amount="200">
+            ¥200.00
+            <span class="bonus">赠送 ¥30</span>
+          </button>
+          <button class="option" data-amount="500">
+            ¥500.00
+            <span class="bonus">赠送 ¥100</span>
+          </button>
+          <button class="option custom-option">
+            自选金额
+            <span class="bonus">赠送充值金额 5%</span>
+          </button>
+        </div>
+        <input type="number" id="custom-input" placeholder="输入金额" style="display: none;" />
+      </div>
+    </main>
+
+    <footer class="footer">
+      <button class="confirm-btn" id="confirm">确认充值</button>
+    </footer>
+  </div>
   <script src="script.js"></script>
 </body>
 </html>
