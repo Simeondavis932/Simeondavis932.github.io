@@ -1,62 +1,36 @@
-body {
-  font-family: Arial, sans-serif;
-  margin: 0;
-  padding: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  background-color: #f8f8f8;
-}
+document.addEventListener("DOMContentLoaded", () => {
+  const options = document.querySelectorAll(".option");
+  const customInput = document.getElementById("custom-input");
+  const confirmBtn = document.getElementById("confirm");
 
-.page {
-  display: none;
-  text-align: center;
-  background: #fff;
-  border-radius: 10px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-  width: 90%;
-  max-width: 400px;
-  padding: 20px;
-}
+  let selectedAmount = 100; // 默认选中 100 元
 
-.page.active {
-  display: block;
-}
+  options.forEach(option => {
+    option.addEventListener("click", () => {
+      options.forEach(opt => opt.classList.remove("selected")); // 移除其他选中状态
+      option.classList.add("selected");
 
-.header {
-  font-size: 20px;
-  font-weight: bold;
-  color: #ff6f61;
-  margin-bottom: 20px;
-}
+      if (option.classList.contains("custom-option")) {
+        customInput.style.display = "block"; // 显示自定义输入框
+        selectedAmount = null;
+      } else {
+        customInput.style.display = "none"; // 隐藏自定义输入框
+        selectedAmount = parseInt(option.getAttribute("data-amount"), 10);
+      }
+    });
+  });
 
-.content p {
-  margin: 10px 0;
-  font-size: 16px;
-  color: #333;
-}
+  confirmBtn.addEventListener("click", () => {
+    if (selectedAmount === null) {
+      const customAmount = parseFloat(customInput.value);
+      if (isNaN(customAmount) || customAmount <= 0) {
+        alert("请输入有效金额");
+        return;
+      }
+      selectedAmount = customAmount;
+    }
 
-button {
-  margin-top: 20px;
-  padding: 10px 20px;
-  font-size: 16px;
-  color: #fff;
-  background: #ff6f61;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-button:hover {
-  background: #e55a4c;
-}
-
-.coupon {
-  border: 1px solid #ff6f61;
-  border-radius: 5px;
-  padding: 10px;
-  margin: 20px 0;
-  background: #fff7f7;
-  color: #333;
-}
+    alert(`您选择充值 ¥${selectedAmount.toFixed(2)} 元`);
+    // 在这里可以添加充值逻辑，例如调用后端接口
+  });
+});
